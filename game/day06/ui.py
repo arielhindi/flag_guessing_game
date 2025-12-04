@@ -14,6 +14,8 @@ import sys
 from pathlib import Path
 import os
 import platform
+import subprocess
+import threading
 
 
 # Add parent directory to path for imports
@@ -116,9 +118,12 @@ class FlagGuessingApp:
         # Highlight the buttons to show feedback
         self._highlight_answer(country_name, is_correct)
         
+        # Play sound immediately (start before messagebox)
+        if is_correct and self.settings["sound"]:
+            self.play_correct_sound()
+        
+        # Show messagebox (this will block, but sound is already playing)
         if is_correct:
-            if self.settings["sound"]:
-                self.play_correct_sound()
             messagebox.showinfo("Correct!", f"✓ That's right — {country_name}!")
         else:
             messagebox.showinfo("Wrong", f"✗ Incorrect. Try the next flag!")
@@ -153,21 +158,33 @@ class FlagGuessingApp:
             btn.config(bg="SystemButtonFace", fg="black")
 
     def play_correct_sound(self):
-        """Play a pleasant 'correct' sound on macOS."""
-        try:
-            if platform.system() == "Darwin":  # macOS
-                # Use macOS system sound (Glass or Ping)
-                os.system("afplay /System/Library/Sounds/Glass.aiff")
-            elif platform.system() == "Windows":
-                import winsound
-                # Windows system sound (ascending tones)
-                winsound.Beep(800, 150)  # 800 Hz, 150 ms
-                winsound.Beep(1000, 150)  # 1000 Hz, 150 ms
-            else:  # Linux and others
-                self.root.bell()
-        except Exception:
-            # Fallback to system bell if sound fails
-            self.root.bell()
+        """Play a pleasant 'correct' sound on macOS asynchronously."""
+        def _play():
+            try:
+                if platform.system() == "Darwin":  # macOS
+                    # Use macOS system sound (Glass or Ping) - non-blocking
+                    subprocess.Popen(
+                        ["afplay", "/System/Library/Sounds/Glass.aiff"],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL
+                    )
+                elif platform.system() == "Windows":
+                    import winsound
+                    # Windows system sound (ascending tones)
+                    winsound.Beep(800, 150)  # 800 Hz, 150 ms
+                    winsound.Beep(1000, 150)  # 1000 Hz, 150 ms
+                else:  # Linux and others
+                    self.root.bell()
+            except Exception:
+                # Fallback to system bell if sound fails
+                try:
+                    self.root.bell()
+                except:
+                    pass
+        
+        # Run sound in background thread to avoid blocking UI
+        thread = threading.Thread(target=_play, daemon=True)
+        thread.start()
 
     def update_status(self):
         """Update the status label with current score."""

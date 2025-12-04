@@ -12,7 +12,15 @@ which country it is from four multiple-choice options. No external dependencies,
 ## Dependencies
 - Python 3.8+
 - tkinter (standard library)
-- No external packages required!
+- No external packages required for gameplay!
+
+## Dev Dependencies (for testing)
+- pytest (for running tests)
+
+To install dev dependencies:
+```bash
+pip install pytest
+```
 
 ## Install and run
 From the repository root:
@@ -25,6 +33,13 @@ python -m game.day06.ui
 Run the test suite from the repository root:
 
 ```bash
-pytest -q
+# Run all tests
+pytest
+
+# Run tests with verbose output
+pytest -v
+
+# Run tests from a specific day
+pytest game/day06/tests/
 ```
 
