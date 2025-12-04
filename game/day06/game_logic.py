@@ -6,11 +6,16 @@ selects countries/flags at random.
 from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
 import random
+import sys
+from pathlib import Path
+
+# Add current directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent))
 
 try:
     from . import fetcher
-except Exception:
-    from fetcher import *
+except (ImportError, ValueError):
+    import fetcher
 
 
 @dataclass

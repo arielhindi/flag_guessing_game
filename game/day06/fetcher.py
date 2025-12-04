@@ -62,8 +62,6 @@ COUNTRIES = [
     ("🇮🇱", "Israel"),
     ("🇸🇦", "Saudi Arabia"),
     ("🇦🇪", "United Arab Emirates"),
-    ("🇲🇽", "Mexico"),
-    ("🇭🇰", "Hong Kong"),
 ]
 
 

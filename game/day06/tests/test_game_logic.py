@@ -1,6 +1,11 @@
 import pytest
+import sys
+from pathlib import Path
 
-from day06.game_logic import GameState
+# Add parent directory to path so we can import game_logic
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from game_logic import GameState
 
 
 def test_game_state_basic():
