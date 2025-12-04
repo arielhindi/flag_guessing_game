@@ -1,4 +1,4 @@
-# Day05 — Flag Guesser Game
+# Flag Guesser Game
 
 This simple GUI game shows a country flag emoji and asks the player to guess
 which country it is from four multiple-choice options. No external dependencies,
