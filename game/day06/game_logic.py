@@ -1,4 +1,4 @@
-"""Core game logic for the Day05 flag guessing game.
+"""Core game logic for the Day06 flag guessing game.
 
 This module provides a GameState class that tracks rounds, score, and
 selects countries/flags at random.
@@ -10,7 +10,7 @@ import random
 try:
     from . import fetcher
 except Exception:
-    from day05 import fetcher
+    from fetcher import *
 
 
 @dataclass

@@ -1,4 +1,4 @@
-# Day05 — Flag Guesser Game
+# Day06 — Flag Guesser Game
 
 This simple GUI game shows a country flag emoji and asks the player to guess
 which country it is from four multiple-choice options. No external dependencies,
@@ -18,7 +18,7 @@ which country it is from four multiple-choice options. No external dependencies,
 From the repository root:
 
 ```bash
-python -m day05.ui
+python -m game.day06.ui
 ```
 
 ## Tests

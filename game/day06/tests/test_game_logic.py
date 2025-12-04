@@ -1,6 +1,6 @@
 import pytest
 
-from day05.game_logic import GameState
+from day06.game_logic import GameState
 
 
 def test_game_state_basic():

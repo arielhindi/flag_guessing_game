@@ -12,12 +12,12 @@ flag_guessing_game/
 ├── .github/
 │   └── copilot-instructions.md (this file)
 ├── game/
-│   ├── day05/
+│   ├── day06/
 │   │   ├── game_logic.py        # Core game state and round logic
 │   │   ├── fetcher.py           # Data fetching for flags
 │   │   ├── ui.py                # User interface components
 │   │   └── ...
-│   ├── day06/
+│   ├── day07/
 │   └── ...
 ```
 
